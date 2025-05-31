@@ -1,31 +1,124 @@
-## Código Fibonacci
+  CODIGO EN JAVA:
+```java
 
-```Java
-public class Fibonacci {
 
-    // Método recursivo para calcular Fibonacci
-    public static int fibonacci(int n) {
-        if (n <= 1) return n;
-        return fibonacci(n - 1) + fibonacci(n - 2);
-    }
+public class MergeSortHelper {
+    public static void merge(int[] A, int p, int q, int r) {
+        int nL = q - p + 1; // length of A[p..q]
+        int nR = r - q;     // length of A[q+1..r]
 
-    // Prueba del método
-    public static void main(String[] args) {
-        int n = 10; 
-        for (int i = 0; i <= n; i++) {
-            System.out.print(fibonacci(i) + " ");
+        // Create temporary arrays
+        int[] L = new int[nL];
+        int[] R = new int[nR];
+
+        // Copy A[p..q] into L[0..nL-1]
+        for (int i = 0; i < nL; i++) {
+            L[i] = A[p + i];
+        }
+
+        // Copy A[q+1..r] into R[0..nR-1]
+        for (int j = 0; j < nR; j++) {
+            R[j] = A[q + 1 + j];
+        }
+
+        int i = 0; // index for L
+        int j = 0; // index for R
+        int k = p; // index for A
+
+        // Merge L and R into A[p..r]
+        while (i < nL && j < nR) {
+            if (L[i] <= R[j]) {
+                A[k] = L[i];
+                i++;
+            } else {
+                A[k] = R[j];
+                j++;
+            }
+            k++;
+        }
+
+        // Copy any remaining elements of L
+        while (i < nL) {
+            A[k] = L[i];
+            i++;
+            k++;
+        }
+
+        // Copy any remaining elements of R
+        while (j < nR) {
+            A[k] = R[j];
+            j++;
+            k++;
         }
     }
 }
+
 ```
-## Identificar las Recurrencias:
 
-La recurrencia del algoritmo de Fibonacci es:
+PARA METER NUMEROS DE CONSOLA: 
+```java
+import java.util.Scanner;
 
-**T(n) = T(n−1) + T(n−2) + O(1)**
-                             
-esto es debido a que, por cada llamada a fibonacci(n) realiza dos llamadas recursivas: fibonacci(n-1) y fibonacci(n-2)
+public class MergeSortHelper {
 
-## Obtener la Ecuación General y Comprobar:
+  
+    public static void merge(int[] A, int p, int q, int r) {
+        int nL = q - p + 1;
+        int nR = r - q;
 
-![WhatsApp Image 2025-05-27 at 23 39 32](https://github.com/user-attachments/assets/571b27fd-d3f7-412b-bb3e-a4269e82d4ff)
+        int[] L = new int[nL];
+        int[] R = new int[nR];
+
+        for (int i = 0; i < nL; i++) {
+            L[i] = A[p + i];
+        }
+
+        for (int j = 0; j < nR; j++) {
+            R[j] = A[q + 1 + j];
+        }
+
+        int i = 0, j = 0, k = p;
+
+        while (i < nL && j < nR) {
+            if (L[i] <= R[j]) {
+                A[k++] = L[i++];
+            } else {
+                A[k++] = R[j++];
+            }
+        }
+
+        while (i < nL) {
+            A[k++] = L[i++];
+        }
+
+        while (j < nR) {
+            A[k++] = R[j++];
+        }
+    }
+
+
+
+    // Función principal para ingresar los numeros del arreglo
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Ingrese la cantidad de elementos: ");
+        int n = scanner.nextInt();
+        int[] A = new int[n];
+
+        System.out.println("Ingrese los elementos del arreglo:");
+        for (int i = 0; i < n; i++) {
+            A[i] = scanner.nextInt();
+        }
+
+       
+
+        System.out.println("Arreglo ordenado:");
+        for (int i = 0; i < n; i++) {
+            System.out.print(A[i] + " ");
+        }
+
+        scanner.close();
+    }
+}
+```
